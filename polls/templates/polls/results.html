@@ -1,0 +1,25 @@
+{% if request.user.is_authenticated %}
+Hello, 
+	{% if request.user.first_name or request.user.last_name %}
+        {{ request.user.first_name }} {{ request.user.last_name }}
+    {% else %}
+        {{ request.user.username }}
+    {% endif %}
+<h1>{{question.question_text}}</h1>
+{% if error_message %}<p><strong>{{error_message}}</strong></p> {% endif %}
+
+
+<h1>{{question.question_text}}</h1>
+
+<ul>
+	{% for choice in question.choice_set.all %}
+		<li>{{choice.choice_text}} -- {{choice.votes}} vote{{choice.votes|pluralize}}</li>
+	{% endfor %}
+</ul>
+
+<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+
+{% else %}
+	You cannot view this page without logging in.
+    <a href="/accounts/login/" class="pull-right">Login</a>
+{% endif %}

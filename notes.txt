@@ -1,0 +1,6 @@
+When deployed on azure webapps by trying out mysql, the app did not run properly -- need to check that.
+Also, till now added only google authentication. Need to add facebook and twitter authetications too. For all of these, need to create a new app for the actual website hosted on azure. So, in total two apps will be created for each - one for the localhost and one for the website hosted on azure. -- need to do this.
+Also, while signingup, need to add a captcha to prevent robots from signing up automatically. -- need to check that.
+After this, need to write down the model for website based on the er diagram made in the design document.
+Later, need to create documentdb on azure and connect it with the webapp.
+After this, start coding the note editing part which requires significant time.

@@ -1,0 +1,30 @@
+{% if request.user.is_authenticated %}
+Hello, 
+	{% if request.user.first_name or request.user.last_name %}
+        {{ request.user.first_name }} {{ request.user.last_name }}
+    {% else %}
+        {{ request.user.username }}
+    {% endif %}
+<h1>{{question.question_text}}</h1>
+{% if error_message %}<p><strong>{{error_message}}</strong></p> {% endif %}
+
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+	<input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+	<label for="choice{{ forloop.counter }}">{{choice.choice_text}}</label><br />
+{% endfor %}
+<input type="submit" value="Vote" />
+</form>
+
+<!-- 
+<ul>
+	{%for choice in question.choice_set.all %}
+		<li>{{choice.choice_text}}</li>
+	{% endfor %}
+</ul> -->
+{% else %}
+	You cannot view this page without logging in.
+    <a href="/accounts/login/" class="pull-right">Login</a>
+{% endif %}
